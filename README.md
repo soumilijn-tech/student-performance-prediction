@@ -86,24 +86,18 @@ Your web browser will automatically open at `http://localhost:8501`.
 Streamlit Community Cloud lets you host your app online for free in just a few clicks!
 
 ### Step 1: Upload Project to GitHub
-1. Create a free account at [github.com](https://github.com) if you do not have one.
-2. In GitHub, click **New repository** (name it `Student-Prediction-Model`), set it to **Public**, and leave "Initialize with README" unchecked.
-3. In your local terminal, navigate inside your project directory and run:
+1. Create a repository on GitHub named `student-performance-prediction` at [github.com/new](https://github.com/new) (keep it Public, uncheck all template boxes).
+2. Push your project to GitHub:
    ```bash
-   git init
-   git add .
-   git commit -m "Deploy Student Performance Prediction Model"
-   git branch -M main
-   git remote add origin https://github.com/<YOUR-GITHUB-USERNAME>/Student-Prediction-Model.git
+   git remote add origin https://github.com/soumilijn-tech/student-performance-prediction.git
    git push -u origin main
    ```
-   *(Replace `<YOUR-GITHUB-USERNAME>` with your actual GitHub username).*
 
 ### Step 2: Deploy on Streamlit Community Cloud
 1. Go to [share.streamlit.io](https://share.streamlit.io/) and log in with your GitHub account.
 2. Click **Create app** (or **New app**).
 3. Fill in the deployment details:
-   - **Repository**: `<YOUR-GITHUB-USERNAME>/Student-Prediction-Model`
+   - **Repository**: `soumilijn-tech/student-performance-prediction`
    - **Branch**: `main`
    - **Main file path**: `app.py`
 4. Click **Deploy!**
