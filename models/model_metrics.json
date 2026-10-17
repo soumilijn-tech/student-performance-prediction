@@ -1,0 +1,86 @@
+{
+    "Logistic Regression": {
+        "Accuracy": 0.8875,
+        "Precision": 0.9036,
+        "Recall": 0.957,
+        "F1_Score": 0.9295,
+        "ROC_AUC": 0.9409,
+        "Confusion_Matrix": [
+            [
+                35,
+                19
+            ],
+            [
+                8,
+                178
+            ]
+        ],
+        "Feature_Importance": {
+            "Study_Hours_Per_Week": 1.3707,
+            "Attendance_Rate": 1.5303,
+            "Past_Exam_Score": 2.0922,
+            "Sleep_Hours": 0.3574,
+            "Tutoring_Sessions": 0.9483,
+            "Extracurricular_Activities": 0.2706,
+            "Parent_Education_Level": 0.5587,
+            "Internet_Access": 2.0998,
+            "Stress_Level": -1.1224
+        }
+    },
+    "Decision Tree": {
+        "Accuracy": 0.825,
+        "Precision": 0.8636,
+        "Recall": 0.9194,
+        "F1_Score": 0.8906,
+        "ROC_AUC": 0.8118,
+        "Confusion_Matrix": [
+            [
+                27,
+                27
+            ],
+            [
+                15,
+                171
+            ]
+        ],
+        "Feature_Importance": {
+            "Study_Hours_Per_Week": 0.1816,
+            "Attendance_Rate": 0.2853,
+            "Past_Exam_Score": 0.3954,
+            "Sleep_Hours": 0.0271,
+            "Tutoring_Sessions": 0.0414,
+            "Extracurricular_Activities": 0.0,
+            "Parent_Education_Level": 0.0313,
+            "Internet_Access": 0.0328,
+            "Stress_Level": 0.0052
+        }
+    },
+    "Random Forest": {
+        "Accuracy": 0.8583,
+        "Precision": 0.8689,
+        "Recall": 0.9624,
+        "F1_Score": 0.9133,
+        "ROC_AUC": 0.9114,
+        "Confusion_Matrix": [
+            [
+                27,
+                27
+            ],
+            [
+                7,
+                179
+            ]
+        ],
+        "Feature_Importance": {
+            "Study_Hours_Per_Week": 0.1814,
+            "Attendance_Rate": 0.2173,
+            "Past_Exam_Score": 0.3625,
+            "Sleep_Hours": 0.0977,
+            "Tutoring_Sessions": 0.0468,
+            "Extracurricular_Activities": 0.0067,
+            "Parent_Education_Level": 0.0254,
+            "Internet_Access": 0.0238,
+            "Stress_Level": 0.0384
+        }
+    }
+}
