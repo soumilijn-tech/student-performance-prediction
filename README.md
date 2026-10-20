@@ -1,20 +1,21 @@
-# 🎓 Student Performance Prediction Model
+# 🎓 Student Performance Prediction
 
-A machine learning web application built from scratch to predict whether a student will pass or is at academic risk, using **Python**, **Pandas**, **NumPy**, **Scikit-learn**, and **Streamlit**.
+> **Smarter Insights for Brighter Futures**
+
+A professional, SaaS-inspired machine learning web application to predict whether a student will pass or is at academic risk, using **Python**, **Pandas**, **NumPy**, **Scikit-learn**, and **Streamlit**.
 
 ---
 
 ## 📌 Project Overview
 
-This project simulates a complete end-to-end Machine Learning data science lifecycle:
-1. **Data Generation**: Generates 1,200 realistic student academic and demographic records.
-2. **Data Preprocessing**: Cleans missing data, encodes categorical features, and standardizes numerical values.
-3. **Model Training**: Trains and compares three popular machine learning algorithms:
-   - **Logistic Regression**: Linear probability baseline classifier.
-   - **Decision Tree Classifier**: Interpretable rule-based classifier.
-   - **Random Forest Classifier**: High-performance ensemble classifier.
-4. **Model Evaluation**: Evaluates models on an unseen test set using Accuracy, Precision, Recall, F1-Score, and ROC-AUC.
-5. **Interactive Web Dashboard**: A Streamlit web application allowing educators and students to test real-time predictions, explore what-if scenarios, and view actionable recommendations.
+This project provides an enterprise-grade academic risk detection and advisory platform:
+1. **Custom Branding**: Dedicated education + AI vector logo, deep navy sidebar, and gradient hero headers.
+2. **Navigation Sections**:
+   - **Home**: Executive overview, KPI metric counters, operational workflow.
+   - **Student Prediction**: Comprehensive input form with validation, real-time risk assessment, passing probabilities, multi-model consensus, and tailored guidance.
+   - **Model Performance**: Genuine held-out test benchmarks, interactive metric comparison charts, confusion matrix diagnostics, and feature importance rankings.
+   - **Visual Insights**: Exploratory cohort visualizations (Attendance vs. Pass Rate, Study Hours vs. Scores, Stress & Guardian influence, and interactive data explorer).
+   - **About**: Architecture, tech stack, and ethical AI in education.
 
 ---
 
@@ -25,6 +26,9 @@ Student-Prediction-Model/
 │
 ├── .streamlit/
 │   └── config.toml                   # Streamlit cloud theme and server configuration
+│
+├── assets/
+│   └── logo.png                      # Custom AI education & prediction branding logo
 │
 ├── data/
 │   ├── raw/
