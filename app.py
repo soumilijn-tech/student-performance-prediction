@@ -262,30 +262,50 @@ st.markdown(f"""
         background: #FFFFFF;
         border: 1px solid #E2E8F0;
         border-radius: 16px;
-        padding: 20px;
+        padding: 22px 16px;
         text-align: center;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
         border-top: 4px solid #4F46E5;
         width: 100%;
         box-sizing: border-box;
         margin-bottom: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 125px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }}
+    
+    .kpi-card:hover {{
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.07);
     }}
     
     .kpi-value {{
-        font-size: 2rem;
+        font-size: clamp(1.6rem, 2.5vw, 2.1rem);
         font-weight: 800;
         color: #1E1B4B;
-        line-height: 1.1;
-        margin: 8px 0;
+        line-height: 1.15;
+        margin: 6px 0;
         word-break: normal !important;
     }}
     
     .kpi-label {{
-        font-size: 0.85rem;
-        font-weight: 600;
+        font-size: 0.8rem;
+        font-weight: 700;
         color: #64748B;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        word-break: normal !important;
+        line-height: 1.25;
+    }}
+    
+    .kpi-subtext {{
+        font-size: 0.78rem;
+        color: #94A3B8;
+        line-height: 1.3;
+        margin-top: 2px;
         word-break: normal !important;
     }}
     
@@ -352,7 +372,7 @@ st.markdown(f"""
         word-break: normal !important;
     }}
     
-    /* Hide Unnecessary Promotional Badges & Streamlit Footers */
+    /* Hide Unnecessary Promotional Badges, Streamlit Footers & Deploy Buttons */
     footer,
     div[class*="viewerBadge"],
     .viewerBadge_container__1QSob,
@@ -369,17 +389,19 @@ st.markdown(f"""
         pointer-events: none !important;
     }}
     
-    /* Prevent Manage App Button From Overlapping Content */
-    div[class*="manageApp"],
-    [data-testid="manage-app-button"] {{
-        bottom: 12px !important;
-        right: 12px !important;
-        opacity: 0.8 !important;
-        transition: opacity 0.2s ease !important;
-    }}
-    div[class*="manageApp"]:hover,
-    [data-testid="manage-app-button"]:hover {{
-        opacity: 1.0 !important;
+    /* Desktop Placement for Manage App */
+    @media screen and (min-width: 769px) {{
+        div[class*="manageApp"],
+        [data-testid="manage-app-button"] {{
+            bottom: 12px !important;
+            right: 12px !important;
+            opacity: 0.85 !important;
+            transition: opacity 0.2s ease !important;
+        }}
+        div[class*="manageApp"]:hover,
+        [data-testid="manage-app-button"]:hover {{
+            opacity: 1.0 !important;
+        }}
     }}
 
     /* =====================================================
@@ -389,14 +411,14 @@ st.markdown(f"""
     /* Tablet & Small Screens (<= 768px) */
     @media screen and (max-width: 768px) {{
         .stApp {{
-            padding-bottom: 110px !important;
+            padding-bottom: 90px !important;
         }}
         
         .main .block-container {{
             padding-left: 14px !important;
             padding-right: 14px !important;
             padding-top: 1.25rem !important;
-            padding-bottom: 110px !important;
+            padding-bottom: 90px !important;
             max-width: 100% !important;
         }}
         
@@ -486,17 +508,23 @@ st.markdown(f"""
         }}
         
         .kpi-card {{
-            padding: 14px 10px !important;
-            border-radius: 12px !important;
-            margin-bottom: 10px !important;
+            padding: 16px 12px !important;
+            border-radius: 14px !important;
+            margin-bottom: 12px !important;
+            min-height: 105px !important;
         }}
         
         .kpi-value {{
-            font-size: 1.65rem !important;
+            font-size: 1.75rem !important;
+            margin: 4px 0 !important;
         }}
         
         .kpi-label {{
             font-size: 0.78rem !important;
+        }}
+        
+        .kpi-subtext {{
+            font-size: 0.76rem !important;
         }}
         
         .badge-pass, .badge-risk {{
@@ -505,16 +533,31 @@ st.markdown(f"""
         }}
         
         .saas-footer {{
-            margin-bottom: 28px !important;
+            margin-bottom: 20px !important;
             padding-bottom: 10px !important;
         }}
         
+        /* Completely Hide All Floating Widgets & Buttons on Mobile */
         div[class*="manageApp"],
-        [data-testid="manage-app-button"] {{
-            bottom: 8px !important;
-            right: 8px !important;
-            transform: scale(0.85);
-            transform-origin: bottom right;
+        [data-testid="manage-app-button"],
+        div[class*="viewerBadge"],
+        .viewerBadge_container__1QSob,
+        div[class*="ProfileButton"],
+        .stAppDeployButton,
+        [data-testid="stStatusWidget"],
+        div[data-testid="stDecoration"],
+        div[style*="position: fixed"][style*="bottom"],
+        div[style*="position:fixed"][style*="bottom"],
+        div[class*="floating"] {{
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            height: 0 !important;
+            width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            z-index: -9999 !important;
         }}
     }}
     
@@ -524,7 +567,7 @@ st.markdown(f"""
             padding-left: 10px !important;
             padding-right: 10px !important;
             padding-top: 1rem !important;
-            padding-bottom: 110px !important;
+            padding-bottom: 90px !important;
         }}
         
         .hero-header {{
@@ -565,12 +608,14 @@ st.markdown(f"""
         }}
         
         .kpi-card {{
-            padding: 12px 8px !important;
-            border-radius: 10px !important;
+            padding: 14px 10px !important;
+            border-radius: 12px !important;
+            margin-bottom: 10px !important;
+            min-height: 98px !important;
         }}
         
         .kpi-value {{
-            font-size: 1.45rem !important;
+            font-size: 1.55rem !important;
         }}
         
         .badge-pass, .badge-risk {{
@@ -785,38 +830,53 @@ if selected_nav == "🏠 Home":
         )
     st.markdown('</div>', unsafe_allow_html=True)
     
+    # Dynamic Statistics Calculation from Real Loaded Datasets and Models
+    total_students_count = len(raw_df) if raw_df is not None else 1200
+    
+    if metrics:
+        best_model_name, best_model_metrics = max(metrics.items(), key=lambda item: item[1]['Accuracy'])
+        peak_accuracy_val = best_model_metrics['Accuracy'] * 100
+        best_model_clean = best_model_name.replace(" (Recommended)", "")
+        rf_recall_val = metrics.get('Random Forest', {}).get('Recall', 0.9624) * 100
+    else:
+        best_model_clean = "Logistic Regression"
+        peak_accuracy_val = 88.75
+        rf_recall_val = 96.24
+        
+    num_predictive_features = len(preprocessor['feature_columns']) if preprocessor and 'feature_columns' in preprocessor else 9
+
     # Quick KPI Counters
     k1, k2, k3, k4 = st.columns(4)
     with k1:
-        st.markdown("""
+        st.markdown(f"""
         <div class="kpi-card">
             <div class="kpi-label">Analyzed Students</div>
-            <div class="kpi-value">1,200</div>
-            <div style="font-size: 0.8rem; color: #64748B;">Validated Cohort Records</div>
+            <div class="kpi-value">{total_students_count:,}</div>
+            <div class="kpi-subtext">Dynamic Cohort Records</div>
         </div>
         """, unsafe_allow_html=True)
     with k2:
-        st.markdown("""
+        st.markdown(f"""
         <div class="kpi-card" style="border-top-color: #10B981;">
             <div class="kpi-label">Peak Model Accuracy</div>
-            <div class="kpi-value" style="color: #059669;">88.75%</div>
-            <div style="font-size: 0.8rem; color: #64748B;">Logistic Regression Baseline</div>
+            <div class="kpi-value" style="color: #059669;">{peak_accuracy_val:.2f}%</div>
+            <div class="kpi-subtext">{best_model_clean} Baseline</div>
         </div>
         """, unsafe_allow_html=True)
     with k3:
-        st.markdown("""
+        st.markdown(f"""
         <div class="kpi-card" style="border-top-color: #8B5CF6;">
             <div class="kpi-label">Early-Risk Recall</div>
-            <div class="kpi-value" style="color: #7C3AED;">96.24%</div>
-            <div style="font-size: 0.8rem; color: #64748B;">Random Forest Sensitivity</div>
+            <div class="kpi-value" style="color: #7C3AED;">{rf_recall_val:.2f}%</div>
+            <div class="kpi-subtext">Random Forest Sensitivity</div>
         </div>
         """, unsafe_allow_html=True)
     with k4:
-        st.markdown("""
+        st.markdown(f"""
         <div class="kpi-card" style="border-top-color: #EC4899;">
             <div class="kpi-label">Predictive Factors</div>
-            <div class="kpi-value" style="color: #DB2777;">9</div>
-            <div style="font-size: 0.8rem; color: #64748B;">Academic & Lifestyle Metrics</div>
+            <div class="kpi-value" style="color: #DB2777;">{num_predictive_features}</div>
+            <div class="kpi-subtext">Academic & Lifestyle Metrics</div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -1144,7 +1204,7 @@ elif selected_nav == "📊 Model Performance":
             <div class="kpi-card" style="border-top-color: #4F46E5;">
                 <div class="kpi-label">Logistic Regression Accuracy</div>
                 <div class="kpi-value" style="color: #4F46E5;">{metrics['Logistic Regression']['Accuracy']*100:.2f}%</div>
-                <div style="font-size: 0.8rem; color: #64748B;">ROC-AUC: {metrics['Logistic Regression']['ROC_AUC']:.4f}</div>
+                <div class="kpi-subtext">ROC-AUC: {metrics['Logistic Regression']['ROC_AUC']:.4f}</div>
             </div>
             """, unsafe_allow_html=True)
         with col_m2:
@@ -1152,7 +1212,7 @@ elif selected_nav == "📊 Model Performance":
             <div class="kpi-card" style="border-top-color: #10B981;">
                 <div class="kpi-label">Random Forest Sensitivity</div>
                 <div class="kpi-value" style="color: #059669;">{metrics['Random Forest']['Recall']*100:.2f}%</div>
-                <div style="font-size: 0.8rem; color: #64748B;">Identifies 96.2% of passing cases</div>
+                <div class="kpi-subtext">Identifies {metrics['Random Forest']['Recall']*100:.1f}% of passing cases</div>
             </div>
             """, unsafe_allow_html=True)
         with col_m3:
@@ -1160,7 +1220,7 @@ elif selected_nav == "📊 Model Performance":
             <div class="kpi-card" style="border-top-color: #8B5CF6;">
                 <div class="kpi-label">Decision Tree F1-Score</div>
                 <div class="kpi-value" style="color: #7C3AED;">{metrics['Decision Tree']['F1_Score']:.4f}</div>
-                <div style="font-size: 0.8rem; color: #64748B;">Rule-based Depth = 5</div>
+                <div class="kpi-subtext">Rule-based Depth = 5</div>
             </div>
             """, unsafe_allow_html=True)
             
@@ -1288,12 +1348,13 @@ elif selected_nav == "📊 Model Performance":
 # SECTION 4: VISUAL INSIGHTS
 # ---------------------------------------------------------
 elif selected_nav == "📈 Visual Insights":
-    st.markdown("""
+    insights_record_count = f"{len(raw_df):,}" if raw_df is not None else "1,200"
+    st.markdown(f"""
     <div class="page-header">
         <h1 class="page-title">
             <span class="title-word">📈 Exploratory</span> <span class="title-word">Data</span> <span class="title-word">& Insights</span>
         </h1>
-        <p class="page-subtitle">Statistical visualizations and trend analysis across the 1,200 cohort records.</p>
+        <p class="page-subtitle">Statistical visualizations and trend analysis across the {insights_record_count} cohort records.</p>
     </div>
     """, unsafe_allow_html=True)
     
