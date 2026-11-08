@@ -42,20 +42,52 @@ def get_base64_logo():
 LOGO_BASE64 = get_base64_logo()
 
 # ---------------------------------------------------------
-# Custom Modern CSS (SaaS Dashboard UI)
+# ---------------------------------------------------------
+# Custom Modern CSS (SaaS Dashboard UI & Mobile Responsive)
 # ---------------------------------------------------------
 st.markdown(f"""
 <style>
-    /* Global Styles */
+    /* Global Fonts & Reset */
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     
-    html, body, [class*="css"] {{
+    *, *::before, *::after {{
+        box-sizing: border-box !important;
+    }}
+    
+    html, body {{
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }}
+    
+    [class*="css"] {{
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }}
     
-    /* Main Background */
+    /* Main Background & Overflow Prevention */
     .stApp {{
         background-color: #F8FAFC;
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        width: 100% !important;
+        padding-bottom: 90px !important;
+    }}
+    
+    .main .block-container {{
+        max-width: 1200px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding-top: 2rem !important;
+        padding-bottom: 90px !important;
+    }}
+    
+    /* Word Wrap & Typography Helpers */
+    .title-word {{
+        display: inline-block;
+        white-space: nowrap;
     }}
     
     /* Deep Navy Sidebar */
@@ -71,6 +103,8 @@ st.markdown(f"""
     [data-testid="stSidebar"] .stMarkdown h3,
     [data-testid="stSidebar"] label {{
         color: #F1F5F9 !important;
+        word-break: normal !important;
+        hyphens: none !important;
     }}
     
     [data-testid="stSidebar"] .stRadio div[role="radiogroup"] > label {{
@@ -87,17 +121,26 @@ st.markdown(f"""
         border-color: #6366F1;
     }}
     
-    /* Gradient Hero Header */
+    /* Gradient Hero Header (Desktop & Tablet Default) */
     .hero-header {{
         background: linear-gradient(135deg, #1E1B4B 0%, #312E81 35%, #4338CA 70%, #6366F1 100%);
         border-radius: 20px;
         padding: 36px 40px;
         color: white;
-        margin-bottom: 28px;
+        margin-bottom: 20px;
         box-shadow: 0 10px 25px -5px rgba(67, 56, 202, 0.3), 0 8px 10px -6px rgba(67, 56, 202, 0.2);
         display: flex;
         align-items: center;
-        gap: 28px;
+        gap: 32px;
+        width: 100%;
+        box-sizing: border-box;
+    }}
+    
+    .hero-logo-box {{
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }}
     
     .hero-logo {{
@@ -108,31 +151,81 @@ st.markdown(f"""
         padding: 6px;
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         object-fit: contain;
+        display: block;
+    }}
+    
+    .hero-content-box {{
+        flex: 1;
+        min-width: 0;
     }}
     
     .hero-title {{
-        font-size: 2.2rem;
+        font-size: clamp(1.6rem, 3.2vw, 2.3rem);
         font-weight: 800;
         margin: 0;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.01em;
         color: #FFFFFF !important;
-        line-height: 1.2;
+        line-height: 1.25;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+        word-wrap: normal !important;
+        hyphens: none !important;
+        -webkit-hyphens: none !important;
+        text-wrap: balance;
+        max-width: 100%;
     }}
     
     .hero-tagline {{
-        font-size: 1.1rem;
+        font-size: clamp(0.95rem, 1.8vw, 1.15rem);
         font-weight: 500;
         color: #C7D2FE !important;
-        margin: 6px 0 0 0;
-        letter-spacing: 0.02em;
+        margin: 8px 0 0 0;
+        letter-spacing: 0.01em;
+        word-break: normal !important;
+        hyphens: none !important;
     }}
     
     .hero-desc {{
-        font-size: 0.95rem;
+        font-size: clamp(0.88rem, 1.4vw, 0.98rem);
         color: #E0E7FF !important;
         margin: 12px 0 0 0;
-        max-width: 780px;
-        line-height: 1.5;
+        max-width: 820px;
+        line-height: 1.6;
+        word-break: normal !important;
+        overflow-wrap: break-word;
+    }}
+    
+    /* Hero Action Buttons Container */
+    .hero-actions-container {{
+        margin-bottom: 24px;
+        width: 100%;
+    }}
+    
+    /* Page Headers */
+    .page-header {{
+        margin-bottom: 24px;
+        width: 100%;
+    }}
+    
+    .page-title {{
+        font-size: clamp(1.35rem, 3.5vw, 1.85rem) !important;
+        font-weight: 800 !important;
+        color: #0F172A !important;
+        margin: 0 !important;
+        line-height: 1.3 !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+        hyphens: none !important;
+        -webkit-hyphens: none !important;
+    }}
+    
+    .page-subtitle {{
+        color: #64748B !important;
+        font-size: clamp(0.85rem, 2.2vw, 1rem) !important;
+        margin: 6px 0 0 0 !important;
+        line-height: 1.5 !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
     }}
     
     /* White SaaS Cards with Subtle Shadows */
@@ -144,6 +237,8 @@ st.markdown(f"""
         margin-bottom: 20px;
         box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.04), 0 2px 4px -2px rgba(15, 23, 42, 0.03);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
+        width: 100%;
+        box-sizing: border-box;
     }}
     
     .saas-card:hover {{
@@ -158,6 +253,8 @@ st.markdown(f"""
         display: flex;
         align-items: center;
         gap: 10px;
+        word-break: normal !important;
+        hyphens: none !important;
     }}
     
     /* KPI Metric Cards */
@@ -169,6 +266,9 @@ st.markdown(f"""
         text-align: center;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
         border-top: 4px solid #4F46E5;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 12px;
     }}
     
     .kpi-value {{
@@ -177,6 +277,7 @@ st.markdown(f"""
         color: #1E1B4B;
         line-height: 1.1;
         margin: 8px 0;
+        word-break: normal !important;
     }}
     
     .kpi-label {{
@@ -185,6 +286,7 @@ st.markdown(f"""
         color: #64748B;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        word-break: normal !important;
     }}
     
     /* Prediction Badges */
@@ -197,6 +299,8 @@ st.markdown(f"""
         font-weight: 800;
         text-align: center;
         box-shadow: 0 8px 16px -4px rgba(16, 185, 129, 0.4);
+        word-break: normal !important;
+        hyphens: none !important;
     }}
     
     .badge-risk {{
@@ -208,6 +312,8 @@ st.markdown(f"""
         font-weight: 800;
         text-align: center;
         box-shadow: 0 8px 16px -4px rgba(239, 68, 68, 0.4);
+        word-break: normal !important;
+        hyphens: none !important;
     }}
     
     /* Primary Action Buttons */
@@ -215,12 +321,14 @@ st.markdown(f"""
         background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%) !important;
         color: white !important;
         font-weight: 700 !important;
-        font-size: 1rem !important;
+        font-size: 0.95rem !important;
         border: none !important;
         border-radius: 12px !important;
-        padding: 12px 24px !important;
+        padding: 12px 20px !important;
         box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
         transition: all 0.2s ease !important;
+        width: 100% !important;
+        min-height: 48px !important;
     }}
     
     .stButton > button:hover {{
@@ -228,14 +336,247 @@ st.markdown(f"""
         box-shadow: 0 6px 18px rgba(79, 70, 229, 0.4) !important;
     }}
     
+    .stButton > button:active {{
+        transform: translateY(0);
+    }}
+    
     /* Footer */
     .saas-footer {{
         text-align: center;
-        padding: 24px;
-        margin-top: 40px;
+        padding: 24px 16px;
+        margin-top: 36px;
+        margin-bottom: 20px;
         border-top: 1px solid #E2E8F0;
         color: #94A3B8;
         font-size: 0.85rem;
+        word-break: normal !important;
+    }}
+    
+    /* Hide Unnecessary Promotional Badges & Streamlit Footers */
+    footer,
+    div[class*="viewerBadge"],
+    .viewerBadge_container__1QSob,
+    div[class*="ProfileButton"],
+    .stAppDeployButton,
+    div[data-testid="stDecoration"] {{
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }}
+    
+    /* Prevent Manage App Button From Overlapping Content */
+    div[class*="manageApp"],
+    [data-testid="manage-app-button"] {{
+        bottom: 12px !important;
+        right: 12px !important;
+        opacity: 0.8 !important;
+        transition: opacity 0.2s ease !important;
+    }}
+    div[class*="manageApp"]:hover,
+    [data-testid="manage-app-button"]:hover {{
+        opacity: 1.0 !important;
+    }}
+
+    /* =====================================================
+       RESPONSIVE BREAKPOINTS (Mobile & Tablet Layouts)
+       ===================================================== */
+       
+    /* Tablet & Small Screens (<= 768px) */
+    @media screen and (max-width: 768px) {{
+        .stApp {{
+            padding-bottom: 110px !important;
+        }}
+        
+        .main .block-container {{
+            padding-left: 14px !important;
+            padding-right: 14px !important;
+            padding-top: 1.25rem !important;
+            padding-bottom: 110px !important;
+            max-width: 100% !important;
+        }}
+        
+        /* Convert Hero Banner to Single-Column Centered Layout */
+        .hero-header {{
+            flex-direction: column !important;
+            text-align: center !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 24px 16px !important;
+            gap: 14px !important;
+            border-radius: 16px !important;
+            margin-bottom: 18px !important;
+            width: 100% !important;
+        }}
+        
+        .hero-logo-box {{
+            width: 100% !important;
+            display: flex !important;
+            justify-content: center !important;
+            margin: 0 auto 4px auto !important;
+        }}
+        
+        .hero-logo {{
+            width: 80px !important;
+            height: 80px !important;
+            margin: 0 auto !important;
+            display: block !important;
+        }}
+        
+        .hero-content-box {{
+            width: 100% !important;
+            text-align: center !important;
+        }}
+        
+        .hero-title {{
+            font-size: clamp(1.3rem, 5.2vw, 1.7rem) !important;
+            text-align: center !important;
+            line-height: 1.3 !important;
+            margin: 0 auto 8px auto !important;
+            word-break: normal !important;
+            overflow-wrap: normal !important;
+            word-wrap: normal !important;
+            hyphens: none !important;
+            -webkit-hyphens: none !important;
+            text-wrap: balance !important;
+        }}
+        
+        .hero-tagline {{
+            text-align: center !important;
+            font-size: clamp(0.9rem, 3.8vw, 1.05rem) !important;
+            margin: 4px auto 0 auto !important;
+        }}
+        
+        .hero-desc {{
+            text-align: center !important;
+            font-size: clamp(0.84rem, 3.2vw, 0.92rem) !important;
+            line-height: 1.55 !important;
+            margin: 10px auto 0 auto !important;
+            max-width: 100% !important;
+            padding: 0 4px !important;
+        }}
+        
+        .hero-actions-container {{
+            margin-bottom: 20px !important;
+        }}
+        
+        .page-header {{
+            text-align: center !important;
+            margin-bottom: 18px !important;
+        }}
+        
+        .page-title {{
+            font-size: clamp(1.2rem, 5vw, 1.55rem) !important;
+            text-align: center !important;
+        }}
+        
+        .page-subtitle {{
+            font-size: 0.85rem !important;
+            text-align: center !important;
+        }}
+        
+        .saas-card {{
+            padding: 16px 14px !important;
+            border-radius: 14px !important;
+            margin-bottom: 14px !important;
+        }}
+        
+        .kpi-card {{
+            padding: 14px 10px !important;
+            border-radius: 12px !important;
+            margin-bottom: 10px !important;
+        }}
+        
+        .kpi-value {{
+            font-size: 1.65rem !important;
+        }}
+        
+        .kpi-label {{
+            font-size: 0.78rem !important;
+        }}
+        
+        .badge-pass, .badge-risk {{
+            font-size: 1.15rem !important;
+            padding: 14px 16px !important;
+        }}
+        
+        .saas-footer {{
+            margin-bottom: 28px !important;
+            padding-bottom: 10px !important;
+        }}
+        
+        div[class*="manageApp"],
+        [data-testid="manage-app-button"] {{
+            bottom: 8px !important;
+            right: 8px !important;
+            transform: scale(0.85);
+            transform-origin: bottom right;
+        }}
+    }}
+    
+    /* Mobile Extra Small Screens (<= 480px, e.g. 360px, 390px, 430px) */
+    @media screen and (max-width: 480px) {{
+        .main .block-container {{
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+            padding-top: 1rem !important;
+            padding-bottom: 110px !important;
+        }}
+        
+        .hero-header {{
+            padding: 20px 12px !important;
+            border-radius: 14px !important;
+            gap: 12px !important;
+            margin-bottom: 16px !important;
+        }}
+        
+        .hero-logo {{
+            width: 72px !important;
+            height: 72px !important;
+            border-radius: 16px !important;
+            padding: 4px !important;
+        }}
+        
+        .hero-title {{
+            font-size: clamp(1.2rem, 5.6vw, 1.55rem) !important;
+            letter-spacing: -0.01em !important;
+            line-height: 1.25 !important;
+        }}
+        
+        .hero-tagline {{
+            font-size: 0.88rem !important;
+            margin-top: 4px !important;
+        }}
+        
+        .hero-desc {{
+            font-size: 0.82rem !important;
+            line-height: 1.5 !important;
+            margin-top: 8px !important;
+        }}
+        
+        .saas-card {{
+            padding: 14px 10px !important;
+            border-radius: 12px !important;
+            margin-bottom: 12px !important;
+        }}
+        
+        .kpi-card {{
+            padding: 12px 8px !important;
+            border-radius: 10px !important;
+        }}
+        
+        .kpi-value {{
+            font-size: 1.45rem !important;
+        }}
+        
+        .badge-pass, .badge-risk {{
+            font-size: 1.05rem !important;
+            padding: 12px 12px !important;
+        }}
     }}
 </style>
 """, unsafe_allow_html=True)
@@ -320,6 +661,21 @@ def preprocess_single_input(input_dict, preprocessor):
 preprocessor, models, metrics = load_artifacts()
 raw_df = load_dataset()
 
+# Navigation State Management
+NAV_OPTIONS = [
+    "🏠 Home",
+    "🔮 Student Prediction",
+    "📊 Model Performance",
+    "📈 Visual Insights",
+    "ℹ️ About"
+]
+
+if "nav_selection" not in st.session_state:
+    st.session_state["nav_selection"] = "🏠 Home"
+
+def navigate_to(page_name):
+    st.session_state["nav_selection"] = page_name
+
 # ---------------------------------------------------------
 # Sidebar Navigation & Branding
 # ---------------------------------------------------------
@@ -328,15 +684,21 @@ with st.sidebar:
     if LOGO_BASE64:
         st.markdown(f"""
         <div style="text-align: center; padding: 10px 0 16px 0;">
-            <img src="data:image/png;base64,{LOGO_BASE64}" style="width: 88px; height: 88px; border-radius: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-bottom: 12px;"/>
-            <h2 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF !important; margin: 0; line-height: 1.2;">Student Performance<br/>Prediction</h2>
-            <p style="font-size: 0.8rem; font-weight: 500; color: #818CF8 !important; margin: 6px 0 0 0;">Smarter Insights for Brighter Futures</p>
+            <img src="data:image/png;base64,{LOGO_BASE64}" style="width: 84px; height: 84px; border-radius: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); margin-bottom: 12px;"/>
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF !important; margin: 0; line-height: 1.25; word-break: normal !important; hyphens: none !important;">
+                <span class="title-word">Student Performance</span><br/><span class="title-word">Prediction</span>
+            </h2>
+            <p style="font-size: 0.8rem; font-weight: 500; color: #818CF8 !important; margin: 6px 0 0 0; word-break: normal !important; hyphens: none !important;">
+                <span class="title-word">Smarter Insights</span> <span class="title-word">for Brighter Futures</span>
+            </p>
         </div>
         """, unsafe_allow_html=True)
     else:
         st.markdown("""
         <div style="text-align: center; padding: 10px 0;">
-            <h2 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF !important;">🎓 Student Prediction</h2>
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: #FFFFFF !important; word-break: normal !important; hyphens: none !important;">
+                🎓 <span class="title-word">Student Performance</span> <span class="title-word">Prediction</span>
+            </h2>
             <p style="font-size: 0.8rem; color: #818CF8 !important;">Smarter Insights for Brighter Futures</p>
         </div>
         """, unsafe_allow_html=True)
@@ -348,14 +710,8 @@ with st.sidebar:
     
     selected_nav = st.radio(
         "Navigation Menu",
-        options=[
-            "🏠 Home",
-            "🔮 Student Prediction",
-            "📊 Model Performance",
-            "📈 Visual Insights",
-            "ℹ️ About"
-        ],
-        index=0,
+        options=NAV_OPTIONS,
+        key="nav_selection",
         label_visibility="collapsed"
     )
     
@@ -378,14 +734,20 @@ with st.sidebar:
 # ---------------------------------------------------------
 if selected_nav == "🏠 Home":
     # Hero Banner
-    logo_img_tag = f'<img src="data:image/png;base64,{LOGO_BASE64}" class="hero-logo" alt="Logo"/>' if LOGO_BASE64 else '🎓'
+    logo_img_tag = f'<img src="data:image/png;base64,{LOGO_BASE64}" class="hero-logo" alt="Student Performance Prediction Logo"/>' if LOGO_BASE64 else '🎓'
     
     st.markdown(f"""
     <div class="hero-header">
-        {logo_img_tag}
-        <div>
-            <h1 class="hero-title">Student Performance Prediction</h1>
-            <p class="hero-tagline">Smarter Insights for Brighter Futures</p>
+        <div class="hero-logo-box">
+            {logo_img_tag}
+        </div>
+        <div class="hero-content-box">
+            <h1 class="hero-title">
+                <span class="title-word">Student</span> <span class="title-word">Performance</span> <span class="title-word">Prediction</span>
+            </h1>
+            <p class="hero-tagline">
+                <span class="title-word">Smarter Insights</span> <span class="title-word">for Brighter Futures</span>
+            </p>
             <p class="hero-desc">
                 An explainable, AI-powered predictive platform that enables educators, academic advisors, and students 
                 to identify academic risk factors early, benchmark progress, and implement proactive educational interventions.
@@ -393,6 +755,35 @@ if selected_nav == "🏠 Home":
         </div>
     </div>
     """, unsafe_allow_html=True)
+    
+    # Hero Quick Action Navigation Buttons
+    st.markdown('<div class="hero-actions-container">', unsafe_allow_html=True)
+    c_btn1, c_btn2, c_btn3 = st.columns(3)
+    with c_btn1:
+        st.button(
+            "🔮 Run Student Prediction",
+            key="btn_hero_pred",
+            use_container_width=True,
+            on_click=navigate_to,
+            args=("🔮 Student Prediction",)
+        )
+    with c_btn2:
+        st.button(
+            "📊 View Model Performance",
+            key="btn_hero_perf",
+            use_container_width=True,
+            on_click=navigate_to,
+            args=("📊 Model Performance",)
+        )
+    with c_btn3:
+        st.button(
+            "📈 Explore Visual Insights",
+            key="btn_hero_vis",
+            use_container_width=True,
+            on_click=navigate_to,
+            args=("📈 Visual Insights",)
+        )
+    st.markdown('</div>', unsafe_allow_html=True)
     
     # Quick KPI Counters
     k1, k2, k3, k4 = st.columns(4)
@@ -473,22 +864,22 @@ if selected_nav == "🏠 Home":
     st.markdown("""
     <div class="saas-card">
         <div class="card-title">🚀 Platform Operational Workflow</div>
-        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 16px;">
-            <div style="flex: 1; min-width: 200px; background: #F8FAFC; padding: 16px; border-radius: 12px; border-left: 4px solid #4F46E5;">
-                <div style="font-weight: 700; color: #1E1B4B; margin-bottom: 4px;">1. Profile Input</div>
-                <div style="font-size: 0.85rem; color: #64748B;">Enter student attendance, study hours, past scores & wellness variables.</div>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-top: 16px; width: 100%;">
+            <div style="flex: 1 1 200px; max-width: 100%; box-sizing: border-box; background: #F8FAFC; padding: 14px 16px; border-radius: 12px; border-left: 4px solid #4F46E5;">
+                <div style="font-weight: 700; color: #1E1B4B; margin-bottom: 4px; word-break: normal !important; hyphens: none !important;">1. Profile Input</div>
+                <div style="font-size: 0.85rem; color: #64748B; line-height: 1.5;">Enter student attendance, study hours, past scores & wellness variables.</div>
             </div>
-            <div style="flex: 1; min-width: 200px; background: #F8FAFC; padding: 16px; border-radius: 12px; border-left: 4px solid #7C3AED;">
-                <div style="font-weight: 700; color: #1E1B4B; margin-bottom: 4px;">2. Feature Pipeline</div>
-                <div style="font-size: 0.85rem; color: #64748B;">Automatic category encoding and StandardScaler normalization.</div>
+            <div style="flex: 1 1 200px; max-width: 100%; box-sizing: border-box; background: #F8FAFC; padding: 14px 16px; border-radius: 12px; border-left: 4px solid #7C3AED;">
+                <div style="font-weight: 700; color: #1E1B4B; margin-bottom: 4px; word-break: normal !important; hyphens: none !important;">2. Feature Pipeline</div>
+                <div style="font-size: 0.85rem; color: #64748B; line-height: 1.5;">Automatic category encoding and StandardScaler normalization.</div>
             </div>
-            <div style="flex: 1; min-width: 200px; background: #F8FAFC; padding: 16px; border-radius: 12px; border-left: 4px solid #059669;">
-                <div style="font-weight: 700; color: #1E1B4B; margin-bottom: 4px;">3. ML Inference</div>
-                <div style="font-size: 0.85rem; color: #64748B;">Real-time classification and calibrated confidence estimation.</div>
+            <div style="flex: 1 1 200px; max-width: 100%; box-sizing: border-box; background: #F8FAFC; padding: 14px 16px; border-radius: 12px; border-left: 4px solid #059669;">
+                <div style="font-weight: 700; color: #1E1B4B; margin-bottom: 4px; word-break: normal !important; hyphens: none !important;">3. ML Inference</div>
+                <div style="font-size: 0.85rem; color: #64748B; line-height: 1.5;">Real-time classification and calibrated confidence estimation.</div>
             </div>
-            <div style="flex: 1; min-width: 200px; background: #F8FAFC; padding: 16px; border-radius: 12px; border-left: 4px solid #DB2777;">
-                <div style="font-weight: 700; color: #1E1B4B; margin-bottom: 4px;">4. Actionable Strategy</div>
-                <div style="font-size: 0.85rem; color: #64748B;">Dynamic interventions tailored to student well-being and study gaps.</div>
+            <div style="flex: 1 1 200px; max-width: 100%; box-sizing: border-box; background: #F8FAFC; padding: 14px 16px; border-radius: 12px; border-left: 4px solid #DB2777;">
+                <div style="font-weight: 700; color: #1E1B4B; margin-bottom: 4px; word-break: normal !important; hyphens: none !important;">4. Actionable Strategy</div>
+                <div style="font-size: 0.85rem; color: #64748B; line-height: 1.5;">Dynamic interventions tailored to student well-being and study gaps.</div>
             </div>
         </div>
     </div>
@@ -500,9 +891,11 @@ if selected_nav == "🏠 Home":
 # ---------------------------------------------------------
 elif selected_nav == "🔮 Student Prediction":
     st.markdown("""
-    <div style="margin-bottom: 24px;">
-        <h2 style="font-size: 1.8rem; font-weight: 800; color: #0F172A; margin: 0;">🔮 Real-Time Student Performance Prediction</h2>
-        <p style="color: #64748B; font-size: 1rem; margin: 6px 0 0 0;">Configure student academic and lifestyle metrics to compute predictive passing risk and guidance.</p>
+    <div class="page-header">
+        <h1 class="page-title">
+            <span class="title-word">🔮 Real-Time</span> <span class="title-word">Student</span> <span class="title-word">Performance</span> <span class="title-word">Prediction</span>
+        </h1>
+        <p class="page-subtitle">Configure student academic and lifestyle metrics to compute predictive passing risk and guidance.</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -735,9 +1128,11 @@ elif selected_nav == "🔮 Student Prediction":
 # ---------------------------------------------------------
 elif selected_nav == "📊 Model Performance":
     st.markdown("""
-    <div style="margin-bottom: 24px;">
-        <h2 style="font-size: 1.8rem; font-weight: 800; color: #0F172A; margin: 0;">📊 Model Evaluation & Benchmarks</h2>
-        <p style="color: #64748B; font-size: 1rem; margin: 6px 0 0 0;">Authentic validation metrics computed on the held-out test cohort (240 unseen students / 20% test split).</p>
+    <div class="page-header">
+        <h1 class="page-title">
+            <span class="title-word">📊 Model</span> <span class="title-word">Evaluation</span> <span class="title-word">& Benchmarks</span>
+        </h1>
+        <p class="page-subtitle">Authentic validation metrics computed on the held-out test cohort (240 unseen students / 20% test split).</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -894,9 +1289,11 @@ elif selected_nav == "📊 Model Performance":
 # ---------------------------------------------------------
 elif selected_nav == "📈 Visual Insights":
     st.markdown("""
-    <div style="margin-bottom: 24px;">
-        <h2 style="font-size: 1.8rem; font-weight: 800; color: #0F172A; margin: 0;">📈 Exploratory Data & Educational Insights</h2>
-        <p style="color: #64748B; font-size: 1rem; margin: 6px 0 0 0;">Statistical visualizations and trend analysis across the 1,200 cohort records.</p>
+    <div class="page-header">
+        <h1 class="page-title">
+            <span class="title-word">📈 Exploratory</span> <span class="title-word">Data</span> <span class="title-word">& Insights</span>
+        </h1>
+        <p class="page-subtitle">Statistical visualizations and trend analysis across the 1,200 cohort records.</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -1023,9 +1420,11 @@ elif selected_nav == "📈 Visual Insights":
 # ---------------------------------------------------------
 elif selected_nav == "ℹ️ About":
     st.markdown("""
-    <div style="margin-bottom: 24px;">
-        <h2 style="font-size: 1.8rem; font-weight: 800; color: #0F172A; margin: 0;">ℹ️ About the Platform & System Architecture</h2>
-        <p style="color: #64748B; font-size: 1rem; margin: 6px 0 0 0;">Methodology, technical stack, and ethical AI in education.</p>
+    <div class="page-header">
+        <h1 class="page-title">
+            <span class="title-word">ℹ️ About</span> <span class="title-word">Platform</span> <span class="title-word">& Architecture</span>
+        </h1>
+        <p class="page-subtitle">Methodology, technical stack, and ethical AI in education.</p>
     </div>
     """, unsafe_allow_html=True)
     
